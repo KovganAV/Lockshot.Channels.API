@@ -11,6 +11,8 @@ builder.Services.AddSignalR();
 
 builder.Services.AddScoped<MessageService>();
 
+builder.Services.AddCors();
+
 var app = builder.Build();
 
 app.MapHub<ChatHub>("/chatHub");

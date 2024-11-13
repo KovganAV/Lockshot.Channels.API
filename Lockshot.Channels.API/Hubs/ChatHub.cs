@@ -38,5 +38,24 @@ namespace Lockshot.Channels.API.Hubs
         {
             await Groups.RemoveFromGroupAsync(Context.ConnectionId, serverId.ToString());
         }
+
+        public async Task DeleteMessage(int messageId, int serverId)
+        {
+            var result = await _messageService.DeleteMessage(messageId);
+            if (result)
+            {
+                await Clients.Group(serverId.ToString()).SendAsync("MessageDeleted", messageId);
+            }
+        }
+
+        public async Task EditMessage(int messageId, string newText, int serverId)
+        {
+            var updatedMessage = await _messageService.EditMessage(messageId, newText);
+            if (updatedMessage != null)
+            {
+                await Clients.Group(serverId.ToString()).SendAsync("MessageEdited", messageId, newText);
+            }
+        }
+
     }
 }
