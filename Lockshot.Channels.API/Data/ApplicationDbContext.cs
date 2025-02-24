@@ -3,12 +3,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Lockshot.Channels.API.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class AppDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
-        {
-        }
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-        public DbSet<Massage> Massages { get; set; }
+        public DbSet<Article> Articles { get; set; }
+        public DbSet<Video> Videos { get; set; }
     }
 }
